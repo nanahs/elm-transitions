@@ -17,7 +17,10 @@ import Html.Events as Events
 import Json.Decode as Decode
 import Json.Encode as Encode
 
-
+{-|
+The representation of all the css class transitions needed
+optional msg's can supplied to be sent after the enter/leave has completeed
+-}
 type Transitions msg
     = Transitions (Internals msg) (Html msg)
 
@@ -34,12 +37,12 @@ type alias Internals msg =
     , onLeave : Maybe msg
     }
 
-
+{-| -}
 make : Internals msg -> Html msg -> Transitions msg
 make =
     Transitions
 
-
+{-| -}
 view : Transitions msg -> Html msg
 view (Transitions config content) =
     Html.node "transitions-transitions"
