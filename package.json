@@ -1,6 +1,6 @@
 {
   "name": "elm-transitions",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Use css classes to apply transitions and to style conditionally rendered elements",
   "main": "index.js",
   "author": "nanahs",
