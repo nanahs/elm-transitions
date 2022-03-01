@@ -1,11 +1,8 @@
 {
   "name": "elm-transitions",
-  "version": "1.0.0",
-  "description": "Conditionally render using css classes during the different stages of a transition",
+  "version": "0.1.0",
+  "description": "Use css classes to apply transitions and to style conditionally rendered elements",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "nanahs",
   "license": "BSD-3-Clause"
 }

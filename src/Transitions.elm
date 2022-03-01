@@ -1,16 +1,15 @@
 module Transitions exposing
-    ( transitions
-    , view
-    , withEnter
-    , withEnterFrom
-    , withEnterTo
-    , withIsShowing
-    , withLeave
-    , withLeaveFrom
-    , withLeaveTo
-    , withOnEnter
-    , withOnLeave
+    ( Transitions
+    , make, view
     )
+
+{-| transitions allows for optional msgs to be fired after the enter/leave transition has completed
+
+@docs Transitions
+
+@docs make, view
+
+-}
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -19,88 +18,26 @@ import Json.Decode as Decode
 import Json.Encode as Encode
 
 
-
--- BUILDER PATTERN
-
-
 type Transitions msg
-    = Transitions
-        { isShowing : Bool
-        , enter : String
-        , enterFrom : String
-        , enterTo : String
-        , onEnter : Maybe msg
-        , leave : String
-        , leaveFrom : String
-        , leaveTo : String
-        , onLeave : Maybe msg
-        }
-        (Html msg)
+    = Transitions (Internals msg) (Html msg)
 
 
-transitions : Html msg -> Transitions msg
-transitions content =
+type alias Internals msg =
+    { isShowing : Bool
+    , enter : String
+    , enterFrom : String
+    , enterTo : String
+    , onEnter : Maybe msg
+    , leave : String
+    , leaveFrom : String
+    , leaveTo : String
+    , onLeave : Maybe msg
+    }
+
+
+make : Internals msg -> Html msg -> Transitions msg
+make =
     Transitions
-        { isShowing = True
-        , enter = ""
-        , enterFrom = ""
-        , enterTo = ""
-        , onEnter = Nothing
-        , leave = ""
-        , leaveFrom = ""
-        , leaveTo = ""
-        , onLeave = Nothing
-        }
-        content
-
-
-withIsShowing : Bool -> Transitions msg -> Transitions msg
-withIsShowing isShowing (Transitions config content) =
-    Transitions { config | isShowing = isShowing } content
-
-
-withEnter : String -> Transitions msg -> Transitions msg
-withEnter enter (Transitions config content) =
-    Transitions { config | enter = enter } content
-
-
-withEnterFrom : String -> Transitions msg -> Transitions msg
-withEnterFrom enterFrom (Transitions config content) =
-    Transitions { config | enterFrom = enterFrom } content
-
-
-withEnterTo : String -> Transitions msg -> Transitions msg
-withEnterTo enterTo (Transitions config content) =
-    Transitions { config | enterTo = enterTo } content
-
-
-withOnEnter : msg -> Transitions msg -> Transitions msg
-withOnEnter onEnter (Transitions config content) =
-    Transitions { config | onEnter = Just onEnter } content
-
-
-withLeave : String -> Transitions msg -> Transitions msg
-withLeave leave (Transitions config content) =
-    Transitions { config | leave = leave } content
-
-
-withLeaveFrom : String -> Transitions msg -> Transitions msg
-withLeaveFrom leaveFrom (Transitions config content) =
-    Transitions { config | leaveFrom = leaveFrom } content
-
-
-withLeaveTo : String -> Transitions msg -> Transitions msg
-withLeaveTo leaveTo (Transitions config content) =
-    Transitions { config | leaveTo = leaveTo } content
-
-
-withOnLeave : msg -> Transitions msg -> Transitions msg
-withOnLeave onLeave (Transitions config content) =
-    Transitions { config | onLeave = Just onLeave } content
-
-
-
--- VIEW
 
 
 view : Transitions msg -> Html msg
