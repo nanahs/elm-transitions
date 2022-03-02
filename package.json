@@ -1,6 +1,6 @@
 {
   "name": "elm-transitions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Use css classes to apply transitions and to style conditionally rendered elements",
   "author": "nanahs",
   "license": "BSD-3-Clause",
